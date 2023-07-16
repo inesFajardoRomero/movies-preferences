@@ -1,0 +1,15 @@
+
+.divFooter{
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background: url('https://elementor.dostguru.com/cms/animex/wp-content/uploads/2020/12/footer_back.jpg');
+}
+
+.divText{
+  width: 100%;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: white;
+}

@@ -1,0 +1,50 @@
+<div style="background:url('assets/img/backgroundCine.webp');">
+  <div class="container row ">
+    <div class="card">
+      <div class="card-header" style="text-align: center;">
+        <h3><strong>Registrarse</strong></h3>
+      </div>
+      <div class="container row justify-content-center align-items-center card-body">
+        <form [formGroup]="myForm">
+          <div class="row justify-content-start">
+            <div class="mb-3 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <label class="form-label"><strong>Usuario</strong></label>
+              <input type="text" formControlName="nick" class="form-control">
+            </div>
+            <div class="mb-3 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <label class="form-label"><strong>Nombre</strong></label>
+              <input type="text" formControlName="nombres" class="form-control">
+            </div>
+            <div class="mb-3 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <label class="form-label"><strong>Apellidos</strong></label>
+              <input type="text" formControlName="apellidos" class="form-control">
+            </div>
+            <div class="mb-3 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <label class="form-label"><strong>Correo</strong></label>
+              <input type="text" formControlName="correo" class="form-control">
+            </div>
+            <div class="mb-3 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <label class="form-label"><strong>Contraseña</strong></label>
+              <input type="password" formControlName="password" class="form-control">
+            </div>
+            <div class="ml-2 mb-3">
+            <div class="border p-3 ml-2 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div class="row justify-content-start">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3" *ngFor="let genero of listGenero">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" [id]="'inlineCheckbox'+genero.id" [value]="genero.id">
+                    <label class="form-check-label" [for]="'inlineCheckbox'+genero.id"><strong>{{genero.name}}</strong></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="mb-3 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <button type="button" style="width: 100%;" (click)="onSubmit(myForm.value)"
+                class="btn btn-primary"><strong>Ingresar</strong></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

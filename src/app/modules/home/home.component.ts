@@ -11,11 +11,23 @@ export class HomeComponent {
   constructor(private componentService: ComponentService) {
   }
 
-  get listSlider():any[] {
+  public objectKeys =  Object.keys;
+
+  get listSlider():any {
     return this.componentService.listSliders;
+  }
+
+  get CategoriaPeliculas():any {
+    return this.componentService.PeliculasCategorias;
+  }
+
+  ngOnChanges() {
+    this.componentService.getMoviesTop();
+    this.componentService.getMoviesCategorias();
   }
 
   ngOnInit() {
     this.componentService.getMoviesTop();
+    this.componentService.getMoviesCategorias();
   }
 }

@@ -1,0 +1,28 @@
+<div style="background:url('assets/img/backgroundCine.webp');">
+  <div class="container row " style="height: 47.7rem;">
+    <div class="card">
+      <div class="card-header" style="text-align: center;">
+        <h3><strong>Iniciar Sesión</strong></h3>
+      </div>
+      <div class="container row justify-content-center align-items-center card-body">
+        <form [formGroup]="myForm">
+          <div class="mb-3 ">
+            <label class="form-label"><strong>Correo</strong></label>
+            <input type="email" formControlName="nick" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label class="form-label"><strong>Contraseña</strong></label>
+            <input type="password" formControlName="password" class="form-control">
+          </div>
+          <div class="mb-4" style="text-align:right;">
+          <label class="form-label"><strong>¿No tienes una cuenta? <a href="/modules/register">Inscribirse</a></strong></label>
+        </div>
+          <div class="mt-6 mb-6">
+            <button type="button" (click)="ingresar(myForm.value)" class="btn btn-primary"
+              style="width: 100%;"><strong>Ingresar</strong></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div [id]="'carouselExampleControls'+id" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item" [ngClass]="{'active': i === 0}" *ngFor="let item of slides; let i = index">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" [ngClass]="{'d-none d-md-block': cardIndex !== 0}"
+        *ngFor="let photo of item; let cardIndex = index">
+          <div class="cards-wrapper contenedor">
+              <img src={{photo?.imagePoster}} style="width:25rem; height:20rem;" alt={{photo?.name}}>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselExampleControls'+id" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselExampleControls'+id" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>

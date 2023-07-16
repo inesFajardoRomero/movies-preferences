@@ -7,6 +7,8 @@ import { Genero } from '../interfaces/sidebar.interfaces';
   template: `
     <components-sidebar [listaGenero]="listGenero"></components-sidebar>
     <router-outlet></router-outlet>
+    <components-footer></components-footer>
+
   `,
 })
 export class ModulesComponent {
@@ -15,6 +17,10 @@ export class ModulesComponent {
 
   get listGenero():Genero[] {
     return this.componentService.listGenero;
+  }
+
+  ngOnChanges() {
+    this.componentService.getGeneros();
   }
 
   ngOnInit() {
