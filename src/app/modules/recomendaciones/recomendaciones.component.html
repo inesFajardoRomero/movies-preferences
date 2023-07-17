@@ -1,10 +1,10 @@
-<components-slider [slideList]="listSlider"></components-slider>
-<div class="pt-2">
+<div style="width: 100%; text-align: center; border:1px solid thistle ; margin-top: 8rem;">
+<h2><strong>Paginas Recomendadas</strong></h2>
+</div>
 
 <div class="container mt-2"  *ngFor="let categoria of objectKeys(CategoriaPeliculas)">
   <div class="container " style="padding-left: 11px ;">
     <h2>{{categoria}}</h2>
   </div>
   <components-slider-sections [id]="categoria" [slideSectionList]="CategoriaPeliculas[categoria]"></components-slider-sections>
-</div>
 </div>

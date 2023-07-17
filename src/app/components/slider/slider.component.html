@@ -1,7 +1,7 @@
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item" [ngClass]="{'active': i === 0}"   data-bs-interval="2000" *ngFor="let photo of slideList, let i = index">
-      <img src={{photo?.image}} class="d-block w-100" alt={{photo?.name}}>
+      <img src={{photo?.imagen}} class="d-block w-100" alt={{photo?.nombre}}>
       <div class="carousel-caption d-none d-md-block">
         <h5>{{photo?.name}}</h5>
         <p>{{photo?.descripcion}}</p>

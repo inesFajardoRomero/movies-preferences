@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentService } from '../services/components.service';
-import { Genero } from '../interfaces/sidebar.interfaces';
+import { IGenero } from '../interfaces/genero.interfaces'
 
 @Component({
   selector: 'module-modules',
@@ -15,7 +15,7 @@ export class ModulesComponent {
   constructor(private componentService: ComponentService) {
   }
 
-  get listGenero():Genero[] {
+  get listGenero():IGenero[] {
     return this.componentService.listGenero;
   }
 

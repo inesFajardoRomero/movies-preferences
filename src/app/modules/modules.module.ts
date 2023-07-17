@@ -9,7 +9,9 @@ import { CommonModule } from '@angular/common';
 import { SliderSectionsComponent } from '../components/slider-sections/slider-sections.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { RegistrarseComponent } from './registrarse/registrarse.component';
+import { RegisterComponent } from './register/register.component';
+import { SeguridadComponent } from './seguridad/seguridad.component';
+import { RecomendacionesComponent } from './recomendaciones/recomendaciones.component';
 
 
 
@@ -27,7 +29,9 @@ import { RegistrarseComponent } from './registrarse/registrarse.component';
     SliderSectionsComponent,
     FooterComponent,
     LoginComponent,
-    RegistrarseComponent
+    RegisterComponent,
+    SeguridadComponent,
+    RecomendacionesComponent
   ],
 })
 export class ModulesModule {

@@ -3,68 +3,60 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IApi } from '../interfaces/api.interfaces';
-import { Genero, ListGenero } from '../interfaces/sidebar.interfaces';
-import { IListResult, IListSlider, ISlider } from '../interfaces/slider.intefaces';
+import { IGenero, IPeliculaGenero} from '../interfaces/genero.interfaces';
+import { IPeliculas, IReporteResult, IUsuariosPeliculas } from '../interfaces/peliculas.interface';
 import * as _ from 'lodash';
+import { SeguridadComponent } from '../modules/seguridad/seguridad.component';
+import { SeguridadService } from './seguridad.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComponentService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private seguridadService:SeguridadService) { }
 
-  public listGenero: Genero[] = [];
-  public listSliders: any[] = [];
+  public listGenero: IGenero[] = [];
+  public listSliders: IPeliculas[] = [];
+
   public PeliculasCategorias:Object = {};
+  public PeliculasCategoriasRecomendas:Object = {};
   public listSlidersSection: any[] = [];
-  private urlGenero = 'https://api.themoviedb.org/3/genre/movie/list';
-  private urlMovieTop = 'https://api.themoviedb.org/3/movie/popular';
-  public options:IApi = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlMmQ4OTM5ODVmOWQyOWIzNWIwNjVmYjJhN2IxYzJjYiIsInN1YiI6IjY0YjIwZTQ4MTY4NGY3MDEwMWFlZTMwMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XN36YY4FBqHVzu4VSmM_ZyqjCplU1abPTb3tSypbxwo'
-    }
-  };
+  private urlGenero = 'https://localhost:7189/api/Genero';
+  private urlMovieTop = 'https://localhost:7189/api/Pelicula';
+  private urlMovieRecomendadas = 'https://localhost:7189/api/Usuario/';
+  private urlReporteria = 'https://localhost:7189/api/Reporteria';
 
   async getGeneros(){
-    this.http.get<any>(this.urlGenero, this.options )
-    .subscribe((resp:ListGenero) =>{
-      this.listGenero = resp.genres;
+    this.http.get<IGenero[]>(this.urlGenero )
+    .subscribe((resp:IGenero[]) =>{
+      this.listGenero = resp;
     })
   }
 
   async getMoviesTop(){
-    this.http.get<any>(this.urlMovieTop, this.options )
-    .subscribe((resp:IListResult) =>{
-      this.listSliders = [];
-      for (let i = 0; i < resp.results.length; i++) {
-        const element:ISlider = {
-          name:resp.results[i].original_title,
-          descripcion:resp.results[i].overview,
-          image:`https://image.tmdb.org/t/p/original${resp.results[i].backdrop_path}`,
-          imagePoster:`https://image.tmdb.org/t/p/original${resp.results[i].poster_path}`
-        }
-        this.listSliders.push(element);
-      }
+    this.http.get<IPeliculas[]>(this.urlMovieTop)
+    .subscribe((resp:IPeliculas[]) =>{
+      this.listSliders = resp;
     })
   }
 
+  getReporte(){
+    return this.http.get<IReporteResult>(this.urlReporteria)
+  }
+
   async getMoviesCategorias(){
-    this.http.get<any>(this.urlMovieTop, this.options )
-    .subscribe((resp:IListResult) =>{
+    this.http.get<IPeliculas[]>(this.urlMovieTop)
+    .subscribe((resp:IPeliculas[]) =>{
       this.listSlidersSection = [];
-      for (let i = 0; i < resp.results.length; i++) {
-        for(let j=0; j < resp.results[i].genre_ids.length; j++){
-          const generoID = resp.results[i].genre_ids[j];
-          const finGenero = this.listGenero.find(g => generoID === g.id);
-          const element:ISlider = {
-            name:resp.results[i].original_title,
-            descripcion:resp.results[i].overview,
-            image:`https://image.tmdb.org/t/p/original${resp.results[i].backdrop_path}`,
-            imagePoster:`https://image.tmdb.org/t/p/original${resp.results[i].poster_path}`,
-            genero:finGenero?.name
+      for (let i = 0; i < resp.length; i++) {
+        for(let j=0; j < resp[i].peliculaGenero.length; j++){
+          const genero:IPeliculaGenero = resp[i].peliculaGenero[j];
+          const finGenero = this.listGenero.find(g => genero.generoId === g.id);
+          const element:IPeliculas = {
+            ...resp[i],
+            genero:finGenero?.nombre,
+
           }
           this.listSlidersSection.push(element);
         }
@@ -73,13 +65,39 @@ export class ComponentService {
     })
   }
 
- /* getGeneros(request : any): Observable<any[]> {
-    return this.http.get(`${this.url}`, this.options).pipe(
-      map(response => {
-        console.log(response);
-        });
+  async getMoviesRecomendadas(){
+    this.http.get<IUsuariosPeliculas>(this.urlMovieRecomendadas+this.seguridadService.obtenerLlaveJWT("id"))
+    .subscribe((resp:IUsuariosPeliculas) =>{
+      this.listSlidersSection = [];
+      for(let i=0; i < this.listSliders.length; i++){
+        const el = this.listSliders[i];
+        for(let j=0; j < el.peliculaGenero.length; j++){
+          const findNameGenero = this.listGenero.find(g =>  el.peliculaGenero[j].generoId === g.id);
+          const finGenero:any = resp.usuarioGenero.find(g => el.peliculaGenero[j].generoId === g.generoId);
+          if(finGenero){
+            const element:IPeliculas = {
+              ...el,
+              genero:findNameGenero?.nombre,
+            }
+            console.log(finGenero);
+            this.listSlidersSection.push(element);
+          }
+        }
       }
-      )
-    );
-  }*/
+      this.PeliculasCategoriasRecomendas =  _.groupBy(this.listSlidersSection, 'genero');
+        /*for(let j=0; j < resp.usuarioGenero.length; j++){
+          const genero:IPeliculaGenero = resp.usuarioGenero[j];
+          const finGenero:any = this.listGenero.find(g => genero.generoId === g.id);
+          console.log(this.listSliders)
+          const element:IUsuariosPeliculas = {
+            ...resp,
+            genero:finGenero?.nombre,
+
+          }
+          this.listSlidersSection.push(element);
+        }*/
+
+
+    })
+  }
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ContentChild, TemplateRef } from '@angular/core';
+import { IPeliculas } from 'src/app/interfaces/peliculas.interface';
 import { ComponentService } from 'src/app/services/components.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class HomeComponent {
 
   public objectKeys =  Object.keys;
 
-  get listSlider():any {
+  get listSlider():IPeliculas[] {
     return this.componentService.listSliders;
   }
 

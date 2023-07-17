@@ -4,7 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ModulesComponent } from './modules.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { RegistrarseComponent } from './registrarse/registrarse.component';
+import { RegisterComponent } from './register/register.component';
+import { RecomendacionesComponent } from './recomendaciones/recomendaciones.component';
+import { isLoggerGuard } from '../guards/is-logger.guard';
 
 
 const routes: Routes = [{
@@ -20,8 +22,13 @@ const routes: Routes = [{
       component: LoginComponent,
     },
     {
+      path: 'recomendaciones',
+      component: RecomendacionesComponent,
+      canActivate : [isLoggerGuard]
+    },
+    {
       path: 'register',
-      component: RegistrarseComponent,
+      component: RegisterComponent,
     },
     {
       path: '',

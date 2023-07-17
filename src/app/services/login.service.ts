@@ -1,24 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LoginI } from 'src/app/interfaces/LoginInterface';
+import { ILoginResult, IRegister, LoginI } from 'src/app/interfaces/loginInterface';
 //import {Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from '@angular/fire/auth';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  url:string = "http://10.10.40.121:3001/print?url=https://www.grupobynsa.com/blog/los-blogs-de-mascotas-que-debes-seguir-si-te-gustan-los-animales/";
+  url:string = "https://localhost:7189/api/Usuario";
 
- // constructor(private http:HttpClient, private auth:Auth){
+  constructor(private http: HttpClient) { }
 
-  //}
+  register(form:IRegister){
+    this.http.post<IRegister>(this.url + "/registrar", form )
+    .subscribe((resp:IRegister) =>{
+      ///this.listGenero = resp;
+      console.log(resp)
+    })
+  }
 
-  // register({email, password}:any){
-  //  // return createUserWithEmailAndPassword(this.auth, email, password)
-  // }
+  login(form:LoginI){
+    return this.http.post<ILoginResult>(this.url + "/login", {usuario : form.nick, contrasena : form.password} );
+  }
 
-  // ingresarLogin({email, password}:any){
-  //  // return signInWithEmailAndPassword(this.auth, email, password);
-  // }
 }

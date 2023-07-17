@@ -1,8 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginI } from 'src/app/interfaces/LoginInterface';
+import { LoginI } from 'src/app/interfaces/loginInterface';
 import { LoginService } from 'src/app/services/login.service';
+import { SeguridadService } from 'src/app/services/seguridad.service';
 
 
 @Component({
@@ -22,16 +24,19 @@ export class LoginComponent {
     nick: ['', Validators.required],
     password: ['', Validators.required],
   });
-  constructor(private http: LoginService, private router: Router, private fb: FormBuilder) {
+  constructor(private loginService: LoginService, private router: Router, private fb: FormBuilder,
+    private seguridadService : SeguridadService) {
 
   }
 
   ingresar(form: LoginI) {
-    /*this.http.ingresarLogin({ email: form.nick, password: form.password })
-      .then((data: any) => {
-        this.router.navigate(['home']);
-      }).catch((error:any) => {
-        alert(error.error.message);
-      });*/
+    this.loginService.login(form).subscribe(respuesta => {
+
+      this.seguridadService.guardarToken(respuesta.token);
+      this.router.navigate(["/modules/home"]);
+    },(error: HttpErrorResponse) => {
+        alert("Inicio de sesion incorrecto")
+    });
+
   }
 }
