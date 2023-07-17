@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ILoginResult, IRegister, LoginI } from 'src/app/interfaces/loginInterface';
+import { ILoginResult, IRegister, LoginI } from '../interfaces/LoginInterface';
 //import {Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from '@angular/fire/auth';
 @Injectable({
   providedIn: 'root'

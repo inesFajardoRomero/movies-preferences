@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { IGenero } from 'src/app/interfaces/genero.interfaces';
-import { SeguridadComponent } from '../../modules/seguridad/seguridad.component';
+import { IGenero } from '../../interfaces/genero.interfaces';
 import { SeguridadService } from '../../services/seguridad.service';
 import { ComponentService } from 'src/app/services/components.service';
 

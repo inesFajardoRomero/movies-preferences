@@ -6,7 +6,6 @@ import { IApi } from '../interfaces/api.interfaces';
 import { IGenero, IPeliculaGenero} from '../interfaces/genero.interfaces';
 import { IPeliculas, IReporteResult, IUsuariosPeliculas } from '../interfaces/peliculas.interface';
 import * as _ from 'lodash';
-import { SeguridadComponent } from '../modules/seguridad/seguridad.component';
 import { SeguridadService } from './seguridad.service';
 
 @Injectable({

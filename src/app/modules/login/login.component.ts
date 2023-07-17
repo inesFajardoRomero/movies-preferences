@@ -2,11 +2,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginI } from 'src/app/interfaces/loginInterface';
+import { LoginI } from 'src/app/interfaces/LoginInterface';
 import { LoginService } from 'src/app/services/login.service';
 import { SeguridadService } from 'src/app/services/seguridad.service';
-
-
 @Component({
   selector: 'module-login',
   templateUrl: './login.component.html',

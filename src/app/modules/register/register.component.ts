@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IRegister, IUsuarioGenero, LoginI, LogupI } from 'src/app/interfaces/loginInterface';
-import { IGenero } from 'src/app/interfaces/genero.interfaces';
+
+import { IGenero } from '../../interfaces/genero.interfaces';
 import { ComponentService } from 'src/app/services/components.service';
 import { LoginService } from 'src/app/services/login.service';
+import { IRegister, IUsuarioGenero } from 'src/app/interfaces/LoginInterface';
 //import { LoginService } from 'src/app/services/loginServices/login.service';
 
 @Component({
